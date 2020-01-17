@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Windows.Input;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Rankings.Xamarin.ViewModels
@@ -26,7 +26,7 @@ namespace Rankings.Xamarin.ViewModels
 
        
 
-            OpenWebCommand = new Command(() => Device.OpenUri(new Uri("https://xamarin.com/platform")));
+            OpenWebCommand = new Command(() => Launcher.OpenAsync(new Uri("https://xamarin.com/platform")));
         }
 
         public ICommand OpenWebCommand { get; }
