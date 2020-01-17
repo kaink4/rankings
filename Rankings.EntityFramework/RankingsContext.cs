@@ -23,6 +23,5 @@ namespace Rankings.EntityFramework
                 options.UseSqlite("Data Source=rankings.db");
             }
         }
-            
     }
 }
