@@ -64,13 +64,13 @@ namespace Ratings.Services.Tests
 
                 var expected = new Ranking
                 {
-                    RankingId = newRankingId,
+                    Id = newRankingId,
                     Title = "new title",
                     Description = "new description",
                     Items = new List<Item>()
                 };
 
-                var ranking = context.Rankings.First(x => x.RankingId == newRankingId);
+                var ranking = context.Rankings.First(x => x.Id == newRankingId);
                 ranking.Should().BeEquivalentTo(expected);
             }
         }
@@ -85,21 +85,21 @@ namespace Ratings.Services.Tests
                 context.Rankings.AddRange(
                     new Ranking()
                     {
-                        RankingId = 1,
+                        Id = 1,
                         Items = new List<Item>(),
                         Title = "empty",
                         Description = "empty"
                     },
                    new Ranking()
                    {
-                       RankingId = 2,
+                       Id = 2,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"
                    },
                    new Ranking()
                    {
-                       RankingId = 3,
+                       Id = 3,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"
@@ -117,7 +117,7 @@ namespace Ratings.Services.Tests
 
             using (var context = GetContext(guid))
             {
-                context.Rankings.Count(x => x.RankingId == 2).Should().Be(0);
+                context.Rankings.Count(x => x.Id == 2).Should().Be(0);
             }
         }
 
@@ -131,21 +131,21 @@ namespace Ratings.Services.Tests
                 context.Rankings.AddRange(
                     new Ranking()
                     {
-                        RankingId = 1,
+                        Id = 1,
                         Items = new List<Item>(),
                         Title = "empty",
                         Description = "empty"
                     },
                    new Ranking()
                    {
-                       RankingId = 2,
+                       Id = 2,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"
                    },
                    new Ranking()
                    {
-                       RankingId = 3,
+                       Id = 3,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"
@@ -162,7 +162,7 @@ namespace Ratings.Services.Tests
 
                 var expected = new Ranking
                 {
-                    RankingId = 2,
+                    Id = 2,
                     Items = new List<Item>(),
                     Title = "empty2",
                     Description = "empty2"
@@ -182,21 +182,21 @@ namespace Ratings.Services.Tests
                 context.Rankings.AddRange(
                     new Ranking()
                     {
-                        RankingId = 1,
+                        Id = 1,
                         Items = new List<Item>(),
                         Title = "empty",
                         Description = "empty"
                     },
                    new Ranking()
                    {
-                       RankingId = 2,
+                       Id = 2,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"
                    },
                    new Ranking()
                    {
-                       RankingId = 3,
+                       Id = 3,
                        Items = new List<Item>(),
                        Title = "empty2",
                        Description = "empty2"

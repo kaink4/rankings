@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Ratings.Web.Dto;
+using Rankings.EntityFramework.Entities;
+using Rankings.WebApi.Dto;
 using Ratings.Web.Services;
 
 namespace Rankings.WebApi.Controllers
@@ -16,7 +17,8 @@ namespace Rankings.WebApi.Controllers
     {
         private readonly IRankingsService _rankingService;
 
-        public RankingsController(IMapper mapper, IRankingsService rankingsService) : base(mapper)
+        public RankingsController(IMapper mapper, IRankingsService rankingsService) 
+            : base(mapper)
         {
             _rankingService = rankingsService;
         }
@@ -28,5 +30,45 @@ namespace Rankings.WebApi.Controllers
             var rankingsDto = _mapper.Map<IEnumerable<RankingDto>>(rankings);
             return Ok(rankingsDto);
         }
+
+        [HttpGet]
+        [HttpHead]
+        [Route("{rankingId}", Name = nameof(GetRanking))]
+        public ActionResult<RankingDto> GetRanking([FromRoute]int rankingId)
+        {
+            var ranking = _rankingService.GetRanking(rankingId);
+           
+            if(ranking == null)
+            {
+                return NotFound();
+            }
+
+            var rankingsDto = _mapper.Map<RankingDto>(ranking);
+
+            return Ok(rankingsDto);
+        }
+
+        [HttpPost]
+        public ActionResult<RankingDto> CreateRanking(RankingForCreationDto rankingForCreationDto)
+        {
+            var ranking = _mapper.Map<Ranking>(rankingForCreationDto);
+            _rankingService.AddRanking(ranking);
+
+            var rankingToReturn = _mapper.Map<RankingDto>(ranking);
+
+            return CreatedAtRoute(
+                nameof(GetRanking),
+                new { rankingId = ranking.Id },
+                rankingToReturn);
+        }
+
+        [HttpOptions]
+        public IActionResult GetRankingsOptions()
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+            return Ok();
+        }
+
     }
+
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Rankings.EntityFramework.Entities;
-using Ratings.Web.Dto;
+using Rankings.WebApi.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace Rankings.WebApi.Profiles
         public RankingsProfile()
         {
             CreateMap<Ranking, RankingDto>();
+            CreateMap<RankingForCreationDto, Ranking>();
         }
     }
 }

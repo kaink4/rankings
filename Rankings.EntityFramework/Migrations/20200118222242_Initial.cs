@@ -2,7 +2,7 @@
 
 namespace Rankings.EntityFramework.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,36 +10,36 @@ namespace Rankings.EntityFramework.Migrations
                 name: "Rankings",
                 columns: table => new
                 {
-                    RankingId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rankings", x => x.RankingId);
+                    table.PrimaryKey("PK_Rankings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Rating = table.Column<int>(nullable: false),
-                    RankingId = table.Column<int>(nullable: true)
+                    RankingId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.ItemId);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Items_Rankings_RankingId",
                         column: x => x.RankingId,
                         principalTable: "Rankings",
-                        principalColumn: "RankingId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

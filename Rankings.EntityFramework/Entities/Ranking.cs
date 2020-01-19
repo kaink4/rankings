@@ -7,10 +7,11 @@ namespace Rankings.EntityFramework.Entities
     public class Ranking
     {
         [Key]
-        public int RankingId { get; set; }
+        public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
-
         public ICollection<Item> Items { get; set; } = new List<Item>();
+        public Image Image { get; set; }
     }
 }

@@ -23,12 +23,12 @@ namespace Ratings.Web.Services
             _context.Rankings.Add(ranking);
             _context.SaveChanges();
 
-            return ranking.RankingId;
+            return ranking.Id;
         }
 
         public void DeleteRanking(int rankingId)
         {
-            var rankingToDelete = _context.Rankings.FirstOrDefault(x => x.RankingId == rankingId);
+            var rankingToDelete = _context.Rankings.FirstOrDefault(x => x.Id == rankingId);
             if (rankingToDelete != null)
             {
                 _context.Rankings.Remove(rankingToDelete);
@@ -38,7 +38,7 @@ namespace Ratings.Web.Services
 
         public Ranking GetRanking(int rankingId)
         {
-            return _context.Rankings.FirstOrDefault(x => x.RankingId == rankingId);
+            return _context.Rankings.FirstOrDefault(x => x.Id == rankingId);
         }
 
 
